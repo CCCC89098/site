@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张崔晗(Cyan) - 个人作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F5F5F5;
+            --secondary: #4A90E2;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans SC', 'Zen Kaku Gothic New', sans-serif; background: var(--primary); color: var(--text); line-height: 1.6; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 1.2rem; font-weight: 700; color: var(--secondary); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--secondary); transition: width 0.3s; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--secondary); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+        .menu-toggle span { width: 25px; height: 2px; background: var(--text); transition: 0.3s; }
+        
+        section { padding: 5rem 2rem; min-height: 100vh; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .section-title { font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 3rem; position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--secondary); }
+        
+        #home { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #FAFAFA 0%, #F0F4F8 100%); padding-top: 80px; }
+        .hero-content { text-align: center; animation: fadeInUp 1s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-name { font-size: 3.5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 2px; }
+        .hero-name span { color: var(--secondary); }
+        .hero-tags { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .hero-tag { background: var(--white); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.9rem; color: var(--text-light); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .hero-tag:first-child { background: var(--secondary); color: var(--white); }
+        .hero-tag:nth-child(2) { background: #E8F4FD; color: var(--secondary); }
+        .hero-slogan { font-size: 1.3rem; color: var(--text-light); margin-bottom: 2.5rem; font-weight: 300; }
+        .hero-buttons { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .btn { padding: 1rem 2.5rem; border-radius: 50px; font-size: 1rem; font-weight: 500; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; }
+        .btn-primary { background: var(--secondary); color: var(--white); }
+        .btn-primary:hover { background: #3A7BC8; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(74,144,226,0.3); }
+        .btn-secondary { background: var(--white); color: var(--text); border: 2px solid #E0E0E0; }
+        .btn-secondary:hover { border-color: var(--secondary); color: var(--secondary); }
+        
+        #about { background: var(--white); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .about-card { background: var(--primary); padding: 2rem; border-radius: 20px; transition: transform 0.3s; }
+        .about-card:hover { transform: translateY(-5px); }
+        .about-card h3 { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--secondary); display: flex; align-items: center; gap: 0.5rem; }
+        .about-card p { color: var(--text-light); font-size: 0.95rem; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skill-tag { background: var(--white); padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.85rem; color: var(--text); border: 1px solid #E8E8E8; }
+        .philosophy-box { background: linear-gradient(135deg, #E8F4FD 0%, #F5F5F5 100%); padding: 1.5rem; border-radius: 15px; text-align: center; font-size: 1.1rem; font-weight: 500; color: var(--secondary); }
+        
+        #experience { background: var(--primary); }
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--secondary); border-radius: 3px; }
+        .timeline-item { position: relative; margin-bottom: 2.5rem; padding: 2rem; background: var(--white); border-radius: 20px; box-shadow: var(--shadow); transition: all 0.3s; }
+        .timeline-item:hover { transform: translateX(10px); box-shadow: var(--shadow-hover); }
+        .timeline-item::before { content: ''; position: absolute; left: -36px; top: 30px; width: 15px; height: 15px; background: var(--secondary); border-radius: 50%; border: 3px solid var(--primary); }
+        .timeline-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+        .timeline-company { font-size: 1.3rem; font-weight: 700; }
+        .timeline-period { background: #E8F4FD; color: var(--secondary); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.85rem; }
+        .timeline-role { color: var(--text-light); font-size: 1rem; margin-bottom: 1rem; }
+        .timeline-highlights { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .highlight { background: var(--primary); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; color: var(--text-light); }
+        
+        #portfolio { background: var(--white); }
+        .portfolio-category { margin-bottom: 3rem; }
+        .category-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+        .category-title::before { content: ''; width: 4px; height: 20px; background: var(--secondary); border-radius: 2px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .portfolio-card { background: var(--primary); border-radius: 15px; overflow: hidden; cursor: pointer; transition: all 0.3s; box-shadow: var(--shadow); }
+        .portfolio-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .portfolio-image { height: 180px; background: linear-gradient(135deg, #E8F4FD 0%, #D4E8F7 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--secondary); }
+        .portfolio-content { padding: 1.5rem; }
+        .portfolio-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .portfolio-desc { font-size: 0.85rem; color: var(--text-light); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .portfolio-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .portfolio-card.expanded .portfolio-details { max-height: 500px; padding-top: 1rem; }
+        .portfolio-details-content { border-top: 1px solid #E8E8E8; padding-top: 1rem; font-size: 0.9rem; color: var(--text-light); line-height: 1.8; }
+        .expand-btn { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 1rem; color: var(--secondary); font-size: 0.85rem; background: none; border: none; cursor: pointer; transition: transform 0.3s; }
+        .portfolio-card.expanded .expand-btn { transform: rotate(180deg); }
+        
+        #contact { background: linear-gradient(135deg, #FAFAFA 0%, #F0F4F8 100%); }
+        .contact-content { text-align: center; max-width: 600px; margin: 0 auto; }
+        .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin: 2rem 0; }
+        .contact-item { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 2rem; background: var(--white); border-radius: 15px; text-decoration: none; color: var(--text); transition: all 0.3s; box-shadow: var(--shadow); }
+        .contact-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); color: var(--secondary); }
+        .contact-icon { font-size: 1.5rem; }
+        
+        footer { background: var(--text); color: var(--white); text-align: center; padding: 2rem; }
+        footer p { font-size: 0.9rem; opacity: 0.8; }
+        
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 70px; left: 0; right: 0; background: var(--white); flex-direction: column; padding: 2rem; gap: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-150%); transition: transform 0.3s; }
+            .nav-links.active { transform: translateY(0); }
+            .menu-toggle { display: flex; }
+            .hero-name { font-size: 2.5rem; }
+            .hero-slogan { font-size: 1.1rem; }
+            section { padding: 4rem 1.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .timeline-item { padding: 1.5rem; }
+            .timeline-header { flex-direction: column; align-items: flex-start; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .contact-links { flex-direction: column; align-items: center; }
+        }
+        
+        .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+        .scroll-indicator span { display: block; width: 20px; height: 20px; border-right: 2px solid var(--secondary); border-bottom: 2px solid var(--secondary); transform: rotate(45deg); opacity: 0.5; }
+        
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; cursor: pointer; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px; position: relative; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+        .lightbox-watermark {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(255,255,255,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            pointer-events: none;
+            z-index: 2001;
+        }
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+            z-index: 2002;
+        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-prev:hover, .lightbox-next:hover { color: var(--secondary); }
+        .lightbox-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1rem;
+            z-index: 2002;
+        }
+        .portfolio-image img { cursor: zoom-in; transition: transform 0.3s; }
+        .portfolio-image img:hover { transform: scale(1.05); }
+        
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 10;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgba(255,255,255,0.4);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transform: rotate(-30deg);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .portfolio-image { position: relative; overflow: hidden; }
+        
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+        .lang-btn {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--secondary);
+            background: transparent;
+            color: var(--secondary);
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .lang-switch { position: absolute; top: 80px; right: 2rem; }
+        }
+        
+        /* Carousel */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: rgba(74,144,226,0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .carousel-nav:hover { background: rgba(74,144,226,1); }
+        .carousel-prev { left: 5px; }
+        .carousel-next { right: 5px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">Cyan</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active" data-key="nav-home">首页</a></li>
+                <li><a href="#about" data-key="nav-about">关于我</a></li>
+                <li><a href="#experience" data-key="nav-exp">实习经历</a></li>
+                <li><a href="#portfolio" data-key="nav-port">作品集</a></li>
+                <li><a href="#contact" data-key="nav-contact">联系我</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+                <button class="lang-btn" onclick="setLang('en')">EN</button>
+            </div>
+            <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-name">张崔晗 <span>(Cyan)</span></h1>
+                <div class="hero-tags">
+                    <span class="hero-tag">运营</span>
+                    <span class="hero-tag">雅思7.5</span>
+                    <span class="hero-tag">日语N1</span>
+                    <span class="hero-tag">跨境电商</span>
+                    <span class="hero-tag">自媒体博主</span>
+                </div>
+                <p class="hero-slogan">用AI+语言能力，打造可落地的产品与内容</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary" data-key="btn-portfolio">查看作品集</a>
+                    <a href="#experience" class="btn btn-secondary" data-key="btn-exp">实习经历</a>
+                    <a href="#contact" class="btn btn-secondary" data-key="btn-contact">联系我</a>
+                </div>
+            </div>
+            <div class="scroll-indicator"><span></span></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-key="about-title">关于我 <span style="font-size: 1rem; font-weight: 400; color: #666;">About Me</span></h2>
+            <p style="text-align: center; margin-top: -2rem; margin-bottom: 2rem; color: #999; font-size: 0.9rem;" data-key="about-subtitle">私について</p>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <img src="img/avatar.jpg" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; box-shadow: 0 8px 30px rgba(0,0,0,0.15);" alt="生活照">
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3 data-key="basic-info">📚 基本信息</h3>
+                    <p>北京语言大学日英复语（日语+英语）专业大四，已保研至上海外国语大学多语种全球传播。擅长出海、本地化、用户增长。</p>
+                </div>
+                <div class="about-card">
+                    <h3 data-key="skills">💡 核心技能</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag" data-key="skill-1">OpenCode Development</span>
+                        <span class="skill-tag" data-key="skill-2">Photoshop</span>
+                        <span class="skill-tag" data-key="skill-3">Operations Planning</span>
+                        <span class="skill-tag" data-key="skill-4">Japanese/English Translation</span>
+                        <span class="skill-tag" data-key="skill-5">Editing & Layout</span>
+                        <span class="skill-tag" data-key="skill-6">Procreate Digital Art</span>
+                    </div>
+                </div>
+                <div class="about-card" style="grid-column: 1 / -1;">
+                    <h3 data-key="philosophy">🎯 个人理念</h3>
+                    <div class="philosophy-box">文科生+AI，让创意快速落地</div>
+                </div>
+                <div class="about-card" style="grid-column: 1 / -1;">
+                    <h3 data-key="hobby">🎮 兴趣爱好</h3>
+                    <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">乙女向游戏+解谜类游戏+休闲策略游戏重度爱好者</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1rem;">
+                        <span class="skill-tag">代号鸢 71级 120h+</span>
+                        <span class="skill-tag">恋与深空 80级 100h+</span>
+                        <span class="skill-tag">保卫萝卜 50h+</span>
+                        <span class="skill-tag">锈湖 30h+</span>
+                        <span class="skill-tag">桃源深处有人家 80h+</span>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;" data-key="talent">长技：古筝、绘画、唱歌、古琴</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">实习经历</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="timeline-company">京东零售 | 电商采销（跨境事业部）</span>
+                        <span class="timeline-period">2025.07 - 2025.11</span>
+                    </div>
+                    <p class="timeline-role">主要职责：品类管理、市场调研、活动策划、品牌维护</p>
+                    <div class="timeline-highlights">
+                        <span class="highlight">主导日本食品品类市场调研，输出10份分析报告，推动首页点击率+380%</span>
+                        <span class="highlight">优化库存管理，滞销库存↓30%，店铺成交转化率+10.94%</span>
+                        <span class="highlight">独立策划节庆及线下活动，创新"虚拟组套"模式，转化率+5%</span>
+                        <span class="highlight">维护10家日本品牌，拉动GMV+324%</span>
+                        <span class="highlight">通过数据打造3款爆品，所辖期间GMV+356%</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="timeline-company">网易有道 | 新媒体运营（教育垂类）</span>
+                        <span class="timeline-period">2024.07 - 2024.09</span>
+                    </div>
+                    <p class="timeline-role">主要职责：账号运营、内容策划、用户转化</p>
+                    <div class="timeline-highlights">
+                        <span class="highlight">从0到1冷启动6个教育账号，累计涨粉2000+，赞藏10000+</span>
+                        <span class="highlight">策划"准高三暑假冲刺""学习搭子"活动，单篇笔记最高赞藏5k+、评论7k+</span>
+                        <span class="highlight">建立用户触达SOP，用户转化率7.8%（小组第一）</span>
+                        <span class="highlight">收集100+用户反馈推动产品优化</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="timeline-company">清华大学·小清包 | 北语校区负责人</span>
+                        <span class="timeline-period">2022.09 - 2024.02</span>
+                    </div>
+                    <p class="timeline-role">主要职责：私域运营、项目孵化、营销活动</p>
+                    <div class="timeline-highlights">
+                        <span class="highlight">识别"早八早餐+健康低脂"需求，参与项目孵化</span>
+                        <span class="highlight">从0搭建并运营2个私域社群（800+人），累计开团118次，跟团1199次</span>
+                        <span class="highlight">校区GMV 1w+，策划市集摆摊、海报设计等营销活动</span>
+                        <span class="highlight">完整落地0→1项目</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">作品集</h2>
+
+            <div class="portfolio-category">
+                <h3 class="category-title">翻译作品</h3>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card" onclick="toggleCard(this)">
+                        <div class="portfolio-image" style="padding: 10px; background: #f8f8f8;">
+                            <img src="img/translation1.jpg" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px;" alt="日汉互译">
+                            <div class="watermark">Cyan Portfolio</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4 class="portfolio-title">日汉互译+英汉互译</h4>
+                            <p class="portfolio-desc">汽水音乐歌词翻译、网易英日互译、翻译课程全部满绩</p>
+                            <div class="portfolio-details">
+                                <div class="portfolio-details-content">曾在汽水音乐进行歌词翻译，负责热门歌曲的日英中多语言互译。参与网易翻译项目，完成英日双向翻译工作。翻译课程 GPA 满绩，专业能力获老师认可。涵盖商务邮件、产品文档、学术论文等多个领域。</div>
+                            </div>
+                            <button class="expand-btn">展开详情 ▾</button>
+                        </div>
+                    </div>
+                    <div class="portfolio-card" onclick="toggleCard(this)">
+                        <div class="portfolio-image" style="padding: 10px; background: #f8f8f8;">
+                            <img src="img/translation2.jpg" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px;" alt="学术论文翻译">
+                            <div class="watermark">Cyan Portfolio</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4 class="portfolio-title">学术论文翻译</h4>
+                            <p class="portfolio-desc">日文学术论文中译，包含摘要及全文翻译</p>
+                            <div class="portfolio-details">
+                                <div class="portfolio-details-content">参与多篇日文学术论文翻译工作，涵盖语言学、传播学、社会学等领域。提供摘要翻译及全文润色服务，确保学术用语准确专业。</div>
+                            </div>
+                            <button class="expand-btn">展开详情 ▾</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-category">
+                <h3 class="category-title">艺术作品</h3>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card" onclick="toggleCard(this)">
+                        <div class="portfolio-image" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; background: #f8f8f8;">
+                            <img src="img/art1.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="板绘1">
+                            <img src="img/art2.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="板绘2">
+                            <img src="img/art3.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="板绘3">
+                            <img src="img/art4.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="板绘4">
+                            <img src="img/art5.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="板绘5">
+                            <img src="img/art6.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="板绘6">
+                            <div class="watermark" style="grid-column: 1 / -1;">Cyan Portfolio</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4 class="portfolio-title">Procreate板绘作品</h4>
+                            <p class="portfolio-desc">数字绘画、插画创作、视觉设计</p>
+                            <div class="portfolio-details">
+                                <div class="portfolio-details-content">使用Procreate进行数字绘画创作，涵盖人物插画、场景绘制、品牌视觉等。作品风格多元，包括日系清新、商业简约等类型。</div>
+                            </div>
+                            <button class="expand-btn">展开详情 ▾</button>
+                        </div>
+                    </div>
+                    <div class="portfolio-card" onclick="toggleCard(this)">
+                        <div class="portfolio-image" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; background: #f8f8f8;">
+                            <img src="img/social1.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="自媒体1">
+                            <img src="img/social2.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="自媒体2">
+                            <img src="img/social3.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="自媒体3">
+                            <div class="watermark" style="grid-column: 1 / -1;">Cyan Portfolio</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4 class="portfolio-title">自媒体账号运营</h4>
+                            <p class="portfolio-desc">小红书账号"江辞呀"运营内容</p>
+                            <div class="portfolio-details">
+                                <div class="portfolio-details-content">独立运营小红书账号"江辞呀"，专注生活方式分享、内容种草。擅长选题策划、视觉呈现、用户互动，已积累一定粉丝基础。</div>
+                            </div>
+                            <button class="expand-btn">展开详情 ▾</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-category">
+                <h3 class="category-title">PPT作品</h3>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card" onclick="toggleCard(this)">
+                        <div class="portfolio-image" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; background: #f8f8f8;">
+                            <img src="img/ppt1.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="PPT1">
+                            <img src="img/ppt2.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="PPT2">
+                            <img src="img/ppt3.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="PPT3">
+                            <img src="img/ppt4.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="PPT4">
+                            <img src="img/ppt5.jpg" style="width: 100%; height: 80px; object-fit: cover; border-radius: 8px;" alt="PPT5">
+                            <div class="watermark" style="grid-column: 1 / -1;">Cyan Portfolio</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4 class="portfolio-title">PPT作品集</h4>
+                            <p class="portfolio-desc">演示文稿设计与制作</p>
+                            <div class="portfolio-details">
+                                <div class="portfolio-details-content">擅长PPT设计与制作，包括商业演示、学术汇报、活动策划等各类演示文稿。注重视觉美观与信息传达的平衡。</div>
+                            </div>
+                            <button class="expand-btn">展开详情 ▾</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-category">
+                <h3 class="category-title">产品分析</h3>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card" onclick="toggleCard(this)" style="grid-column: 1 / -1;">
+                        <div class="portfolio-image" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; background: #f8f8f8;">
+                            <img src="img/lemon1.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="产品分析1">
+                            <img src="img/lemon2.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="产品分析2">
+                            <img src="img/lemon3.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="产品分析3">
+                            <img src="img/lemon4.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="产品分析4">
+                            <img src="img/lemon5.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="产品分析5">
+                            <img src="img/lemon6.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="产品分析6">
+                            <div class="watermark" style="grid-column: 1 / -1;">Cyan Portfolio</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4 class="portfolio-title">Lemon8 产品分析报告</h4>
+                            <p class="portfolio-desc">字节跳动旗下海外种草平台</p>
+                            <div class="portfolio-details"><div class="portfolio-details-content"></div></div>
+                            <button class="expand-btn">展开详情 ▾</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-category">
+                <h3 class="category-title">海报设计</h3>
+                <div class="portfolio-grid">
+                    <div class="portfolio-card" onclick="toggleCard(this)">
+                        <div class="portfolio-image" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; background: #f8f8f8;">
+                            <img src="img/poster1.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="海报1">
+                            <img src="img/poster2.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="海报2">
+                            <img src="img/poster3.jpg" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px;" alt="海报3">
+                            <div class="watermark" style="grid-column: 1 / -1;">Cyan Portfolio</div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h4 class="portfolio-title">海报设计作品</h4>
+                            <p class="portfolio-desc">品牌视觉海报、创意设计</p>
+                            <div class="portfolio-details">
+                                <div class="portfolio-details-content">各类海报设计与制作，涵盖品牌宣传、活动海报、社交媒体配图等。注重视觉美感和信息传达。</div>
+                            </div>
+                            <button class="expand-btn">展开详情 ▾</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">联系我</h2>
+            <div class="contact-content">
+                <div class="contact-links">
+                    <a href="mailto:cyann0621@163.com" class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <span>cyann0621@163.com</span>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/user/profile/5a7aa42311be104a7cd85d9d" target="_blank" class="contact-item">
+                        <span class="contact-icon">📕</span>
+                        <span>江辞呀</span>
+                    </a>
+                    <a href="file/CV.pdf" download class="contact-item">
+                        <span class="contact-icon">📄</span>
+                        <span>下载简历</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Cyan | 用OpenCode打造</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+        navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { navLinks.classList.remove('active'); }); });
+
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) { current = section.getAttribute('id'); }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').slice(1) === current) { item.classList.add('active'); }
+            });
+        });
+
+        function toggleCard(card) { card.classList.toggle('expanded'); }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        const lightbox = document.createElement('div');
+        lightbox.id = 'lightbox';
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = '<span class="lightbox-close">&times;</span><span class="lightbox-prev">&#8249;</span><span class="lightbox-next">&#8250;</span><img src="" alt="大图"><div class="lightbox-watermark">Cyan Portfolio</div><div class="lightbox-counter"></div>';
+        document.body.appendChild(lightbox);
+        
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+        const lightboxNext = lightbox.querySelector('.lightbox-next');
+        const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+        
+        let allImages = [];
+        let currentImageIndex = 0;
+        
+        allImages = Array.from(document.querySelectorAll('.portfolio-image img')).map(img => img.src);
+        
+        document.querySelectorAll('.portfolio-image img').forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const clickedSrc = img.src;
+                currentImageIndex = allImages.indexOf(clickedSrc);
+                lightboxImg.src = clickedSrc;
+                lightboxCounter.textContent = `${currentImageIndex + 1} / ${allImages.length}`;
+                lightbox.classList.add('active');
+            });
+        });
+        
+        lightbox.addEventListener('click', () => { lightbox.classList.remove('active'); });
+        document.querySelector('.lightbox-close').addEventListener('click', (e) => { e.stopPropagation(); lightbox.classList.remove('active'); });
+        
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+            lightboxImg.src = allImages[currentImageIndex];
+            lightboxCounter.textContent = `${currentImageIndex + 1} / ${allImages.length}`;
+        });
+        
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % allImages.length;
+            lightboxImg.src = allImages[currentImageIndex];
+            lightboxCounter.textContent = `${currentImageIndex + 1} / ${allImages.length}`;
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') {
+                currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+                lightboxImg.src = allImages[currentImageIndex];
+                lightboxCounter.textContent = `${currentImageIndex + 1} / ${allImages.length}`;
+            } else if (e.key === 'ArrowRight') {
+                currentImageIndex = (currentImageIndex + 1) % allImages.length;
+                lightboxImg.src = allImages[currentImageIndex];
+                lightboxCounter.textContent = `${currentImageIndex + 1} / ${allImages.length}`;
+            } else if (e.key === 'Escape') {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Carousel functionality
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            const grid = card.querySelector('.portfolio-image');
+            if (!grid || !grid.style.gridTemplateColumns) return;
+            
+            const images = grid.querySelectorAll('img');
+            if (images.length <= 3) return;
+            
+            let currentIndex = 0;
+            const totalImages = images.length;
+            
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'carousel-nav carousel-prev';
+            prevBtn.innerHTML = '&#8249;';
+            
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'carousel-nav carousel-next';
+            nextBtn.innerHTML = '&#8250;';
+            
+            grid.style.position = 'relative';
+            grid.appendChild(prevBtn);
+            grid.appendChild(nextBtn);
+            
+            function showImages(start) {
+                images.forEach((img, i) => {
+                    if (i >= start && i < start + 3) {
+                        img.style.display = 'block';
+                    } else {
+                        img.style.display = 'none';
+                    }
+                });
+            }
+            
+            showImages(0);
+            
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentIndex = (currentIndex - 3 + totalImages) % totalImages;
+                showImages(currentIndex);
+            });
+            
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentIndex = (currentIndex + 3) % totalImages;
+                showImages(currentIndex);
+            });
+        });
+
+        // Language translations
+        const translations = {
+            zh: {
+                "hero-tag-2": "雅思7.5",
+                "talent": "长技：古筝、绘画、唱歌、古琴",
+                "skill-1": "OpenCode开发",
+                "skill-2": "PS",
+                "skill-3": "运营策划",
+                "skill-4": "日/英语翻译",
+                "skill-5": "排版剪辑",
+                "skill-6": "Procreate板绘"
+            },
+            ja: {
+                "nav-home": "ホーム",
+                "nav-about": "私について",
+                "nav-exp": "インターン",
+                "nav-port": "ポートフォリオ",
+                "nav-contact": "お問い合わせ",
+                "hero-tag-1": "運営",
+                "hero-tag-2": "アイエルツ7.5",
+                "hero-tag-3": "日本語N1",
+                "hero-tag-4": "跨境EC",
+                "hero-tag-5": "自媒体博主",
+                "hero-slogan": "AI+言語能力で、実用的な製品とコンテンツを生み出す",
+                "btn-portfolio": "ポートフォリオを見る",
+                "btn-exp": "インターン",
+                "btn-contact": "お問い合わせ",
+                "about-title": "私について",
+                "about-subtitle": "About Me",
+                "about-jp": "私について",
+                "basic-info": "📚 基本情報",
+                "basic-desc": "北京言語大学日英複語（日語＋英語）学部4年生、上海外国语大学多語種グローバルコミュニケーション修士課程に進学予定。出海、ローカライゼーション、ユーザー成長が得意。",
+                "skills": "💡 コアスキル",
+                "philosophy": "🎯 個人理念",
+                "philosophy-desc": "文系学生+AIで、アイデアを素早く形に",
+                "hobby": "🎮 趣味・特技",
+                "hobby-desc": "乙女ゲーム＋パズルゲーム＋休闲ストラテジーゲーム愛好家",
+                "hobby-games": "代号鸢 Lv.71 120h+ / 恋与深空 Lv.80 100h+ / 保卫萝卜 50h+ / 锈湖 30h+ / 桃源深处有人家 80h+",
+                "talent": "長技：古箏、絵画、歌、琴",
+                "exp-title": "インターン",
+                "jd-title": "JD.com | ECbuyer（跨境事业部）",
+                "jd-period": "2025.07 - 2025.11",
+                "jd-role": "カテゴリ管理、市場調査、イベント企画、ブランド管理",
+                "jd-h1": "日本食品カテゴリ市場調査主導、10件の分析レポート作成、首页クリック率+380%",
+                "jd-h2": "在庫管理最適化、滞留在庫↓30%、店铺成交転換率+10.94%",
+                "jd-h3": "祝日・オフラインイベント企画、「仮想セット」モデルは転換率+5%",
+                "jd-h4": "10の日本ブランドを管理、GMV+324%",
+                "jd-h5": "データで3つのヒット商品を創り、GMV+356%",
+                "wy-title": "网易有道 | ニューメディア運営（教育）",
+                "wy-period": "2024.07 - 2024.09",
+                "wy-role": "アカウント運営、コンテンツ企画、ユーザー転換",
+                "wy-h1": "6つの教育アカウントを0から冷起動、累計フォロワー2000+、いいね・保存10000+",
+                "wy-h2": "「新高3」「学習パートナー」イベント企画、単，最高いいね・保存5k+、コメント7k+",
+                "wy-h3": "ユーザーアプローチSOPを構築、ユーザー転換率7.8%（グループ第1）",
+                "wy-h4": "100+のユーザーフィードバックを収集し、製品最適化を推進",
+                "tsinghua-title": "清華大学・小清包 | 北京語言大学担当者",
+                "tsinghua-period": "2022.09 - 2024.02",
+                "tsinghua-role": "プライベートドメイン運営、项目孵化、营销活動",
+                "tsinghua-h1": "「朝ごはん＋健康低脂質」ニーズを発掘、项目孵化に参加",
+                "tsinghua-h2": "2つのプライベートドメインコミュニティ（800+人）を0から構築・運営、118回团购、1199回参加",
+                "tsinghua-h3": "キャンパスGMV 1w+、市即レイアウト、ポスターデザインなどのマーケティングイベント企画",
+                "tsinghua-h4": "完全な0→1プロジェクト落地",
+                "portfolio-title": "ポートフォリオ",
+                "trans-category": "翻訳作品",
+                "trans1-title": "日汉・英汉互訳",
+                "trans1-desc": "汽水音楽歌詞翻訳、网易英日互訳、翻訳コース全部満点",
+                "trans1-detail": "汽水音楽で歌詞翻訳を担当し、热门歌曲の日英中多言語互訳を行う。网易翻訳プロジェクトに参加し、英日双方向翻訳作業を完了。翻訳コース GPA 満点、専門能力を 先生から認められる。ビジネスメール、製品文書、学術論文などの多个分野をカバー。",
+                "trans2-title": "学術論文翻訳",
+                "trans2-desc": "日本語学術論文中国語訳、摘要及び全文翻訳",
+                "trans2-detail": "複数の日本語学術論文翻訳に参加し、语言学、伝播学、社会学などの分野をカバー。摘要翻訳及び全文潤色サービスを提供し、学術用語の正確性と専門性を確保。",
+                "art-category": "アート作品",
+                "art1-title": "Procreateデジタル絵画",
+                "art1-desc": "デジタル絵画、イラストレーション、ビジュアルデザイン",
+                "art1-detail": "Procreateでデジタル絵画創作を行い、人物イラストレーション、シーン描写、ブランドビジュアルなどをカバー。作品スタイルは多様で、日系清新、ビジネス简约などの类型を含む。",
+                "social-title": "自媒体アカウント運営",
+                "social-desc": "小红书アカウント「江辞呀」運営コンテンツ",
+                "social-detail": "小红书アカウント「江辞呀」を独自に運営し、生活方式分享とコンテンツ種草に特化。題名策划、ビジュアルプレゼンテーション、ユーザー互动が得意で、ある程度のファンベースを蓄積。",
+                "ppt-category": "PPT作品",
+                "ppt-title": "PPT作品集",
+                "ppt-desc": "プレゼンテーション資料设计与制作",
+                "ppt-detail": "PPT设计与制作が得意で、ビジネス演示、学術報告、イベント企画などの各类プレゼンテーション資料を担当。視覚的美しさと情報伝達のバランスを重視。",
+                "product-category": "製品分析",
+                "product-title": "Lemon8 製品分析レポート",
+                "product-desc": "TikTokを運営ByteDance（バイトダンス）社が開発したライフスタイル共有SNSアプリ",
+                "poster-category": "ポスターデザイン",
+                "poster-title": "ポスターデザイン作品",
+                "poster-desc": "ブランドビジュアルポスター、クリエイティブデザイン",
+                "poster-detail": "各类ポスター设计与制作、ブランド宣伝、活动ポスター、ソーシャルメディア画像などをカバー。視覚的美しさと情報伝達を重視。",
+                "contact-title": "お問い合わせ",
+                "resume": "履歴書ダウンロード",
+                "expand": "詳細 ▾",
+                "footer": "© 2026 Cyan | OpenCodeで作成"
+            },
+            en: {
+                "nav-home": "Home",
+                "nav-about": "About",
+                "nav-exp": "Experience",
+                "nav-port": "Portfolio",
+                "nav-contact": "Contact",
+                "hero-tag-1": "Operations",
+                "hero-tag-2": "IELTS 7.5",
+                "hero-tag-3": "Japanese N1",
+                "hero-tag-4": "Cross-border EC",
+                "hero-tag-5": "Social Media",
+                "hero-slogan": "Using AI + language skills to create practical products and content",
+                "btn-portfolio": "View Portfolio",
+                "btn-exp": "Experience",
+                "btn-contact": "Contact",
+                "about-title": "About Me",
+                "about-subtitle": "About Me",
+                "about-jp": "私について",
+                "basic-info": "📚 Basic Info",
+                "basic-desc": "Senior at Beijing Language and Culture University (Japanese-English), admitted to Shanghai International Studies University for Multi-lingual Global Communication. Specializing in overseas business, localization, and user growth.",
+                "skills": "💡 Core Skills",
+                "philosophy": "🎯 Philosophy",
+                "philosophy-desc": "Liberal Arts + AI = Fast Idea Implementation",
+                "hobby": "🎮 Interests & Talents",
+                "hobby-desc": "Otome games + Puzzle games + Casual strategy games enthusiast",
+                "hobby-games": "Code:鸢 Lv.71 120h+ / Love and Deep Space Lv.80 100h+ / Carrot Fantasy 50h+ / Rusty Lake 30h+ / Peach Village 80h+",
+                "talent": "Talents: Guzheng, Painting, Singing, Guqin",
+                "exp-title": "Experience",
+                "jd-title": "JD.com | E-commerce Buyer (Cross-border)",
+                "jd-period": "2025.07 - 2025.11",
+                "jd-role": "Category Management, Market Research, Event Planning, Brand Maintenance",
+                "jd-h1": "Led Japanese food category market research, 10 analysis reports, homepage CTR +380%",
+                "jd-h2": "Optimized inventory, slow-moving stock ↓30%, conversion rate +10.94%",
+                "jd-h3": "Planned holiday & offline events, \"virtual bundle\" model, conversion +5%",
+                "jd-h4": "Maintained 10 Japanese brands, GMV +324%",
+                "jd-h5": "Created 3 hit products via data, GMV +356%",
+                "wy-title": "NetEase Youdao | New Media (Education)",
+                "wy-period": "2024.07 - 2024.09",
+                "wy-role": "Account Operations, Content Planning, User Conversion",
+                "wy-h1": "Cold-started 6 education accounts, 2000+ followers, 10000+ likes",
+                "wy-h2": "Planned \"Senior 3 Summer\" \"Study Partner\" events, 5k+ likes, 7k+ comments",
+                "wy-h3": "Built user outreach SOP, 7.8% conversion rate (team first)",
+                "wy-h4": "Collected 100+ user feedback for product optimization",
+                "tsinghua-title": "Tsinghua · Xiao Qing Bao | BLCU Campus Lead",
+                "tsinghua-period": "2022.09 - 2024.02",
+                "tsinghua-role": "Private Domain, Project Incubation, Marketing",
+                "tsinghua-h1": "Identified \"healthy breakfast + low fat\" demand, joined project incubation",
+                "tsinghua-h2": "Built 2 communities (800+ people) from 0, 118 group buys, 1199 participants",
+                "tsinghua-h3": "Campus GMV 1w+, planned markets, poster designs, marketing events",
+                "tsinghua-h4": "Complete 0→1 project implementation",
+                "portfolio-title": "Portfolio",
+                "trans-category": "Translation",
+                "trans1-title": "Japanese/English ↔ Chinese",
+                "trans1-desc": "Soda Music lyrics, NetEase EN-JP translation, All translation courses GPA 4.0",
+                "trans1-detail": "Translated lyrics for Soda Music, handling multilingual (Japanese-English-Chinese) translation. Worked on NetEase translation projects, completing English-Japanese bidirectional translation. All translation courses achieved full GPA. Covers business emails, product documentation, academic papers and more.",
+                "trans2-title": "Academic Paper Translation",
+                "trans2-desc": "Japanese academic papers translated to Chinese",
+                "trans2-detail": "Translated multiple Japanese academic papers in linguistics, communication studies, sociology. Provides abstract translation and full-text polishing, ensuring accurate academic terminology.",
+                "art-category": "Art Works",
+                "art1-title": "Procreate Digital Art",
+                "art1-desc": "Digital painting, illustration, visual design",
+                "art1-detail": "Creates digital art using Procreate, covering character illustration, scene design, brand visuals. Diverse styles including Japanese clean and business minimalist.",
+                "social-title": "Social Media",
+                "social-desc": "Xiaohongshu account \"江辞呀\" content",
+                "social-detail": "Independently operates Xiaohongshu account \"江辞呀\", focusing on lifestyle sharing and content seeding. Expert in topic planning, visual presentation, and user interaction, having accumulated a following.",
+                "ppt-category": "PPT Works",
+                "ppt-title": "PPT Portfolio",
+                "ppt-desc": "Presentation design and制作",
+                "ppt-detail": "Skilled in PPT design and production, including business presentations, academic reports, event planning materials. Emphasizes visual aesthetics and information delivery balance.",
+                "product-category": "Product Analysis",
+                "product-title": "Lemon8 Product Analysis",
+                "product-desc": "ByteDance's overseas lifestyle platform",
+                "poster-category": "Poster Design",
+                "poster-title": "Poster Design Works",
+                "poster-desc": "Brand visual posters, creative design",
+                "poster-detail": "Various poster designs including brand promotion, event posters, social media graphics. Focuses on visual aesthetics and information delivery.",
+                "contact-title": "Contact",
+                "resume": "Download Resume",
+                "expand": "Expand ▾",
+                "footer": "© 2026 Cyan | Built with OpenCode"
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const t = translations[lang];
+            if (!t) return;
+            
+            // Update data-key elements
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (t[key]) el.textContent = t[key];
+            });
+            
+            // Hero section tags
+            const tags = document.querySelectorAll('.hero-tag');
+            if (t["hero-tag-1"]) tags[0].textContent = t["hero-tag-1"];
+            if (t["hero-tag-2"]) tags[1].textContent = t["hero-tag-2"];
+            if (t["hero-tag-3"]) tags[2].textContent = t["hero-tag-3"];
+            if (t["hero-tag-4"]) tags[3].textContent = t["hero-tag-4"];
+            if (t["hero-tag-5"]) tags[4].textContent = t["hero-tag-5"];
+            
+            // Hero slogan and buttons
+            document.querySelector('#home .hero-slogan').textContent = t["hero-slogan"];
+            document.querySelector('#home .btn-primary').textContent = t["btn-portfolio"];
+            document.querySelectorAll('#home .btn-secondary')[0].textContent = t["btn-exp"];
+            document.querySelectorAll('#home .btn-secondary')[1].textContent = t["btn-contact"];
+            
+            // Section titles
+            document.querySelector('#about .section-title').innerHTML = t["about-title"] + ' <span style="font-size: 1rem; font-weight: 400; color: #666;">' + t["about-subtitle"] + '</span>';
+            document.querySelector('#about > .container > p').textContent = t["about-jp"];
+            
+            // Basic info
+            document.querySelector('#about .about-card:first-child p').textContent = t["basic-desc"];
+            document.querySelector('#about .philosophy-box').textContent = t["philosophy-desc"];
+            
+            // Talent
+            const talentEl = document.querySelector('#about [data-key="talent"]');
+            if (talentEl && t["talent"]) talentEl.textContent = t["talent"];
+            
+            // Hobby
+            const hobbyDesc = document.querySelector('#about .about-card:nth-child(4) p');
+            if (hobbyDesc) hobbyDesc.textContent = t["hobby-games"];
+            
+            // Experience section
+            document.querySelector('#experience .section-title').textContent = t["exp-title"];
+            
+            // JD.com
+            const jdCompany = document.querySelector('#experience .timeline-item:first-child .timeline-company');
+            if (jdCompany) jdCompany.textContent = t["jd-title"];
+            document.querySelector('#experience .timeline-item:first-child .timeline-role').textContent = t["jd-role"];
+            const jdHighlights = document.querySelectorAll('#experience .timeline-item:first-child .highlight');
+            jdHighlights[0].textContent = t["jd-h1"];
+            jdHighlights[1].textContent = t["jd-h2"];
+            jdHighlights[2].textContent = t["jd-h3"];
+            jdHighlights[3].textContent = t["jd-h4"];
+            jdHighlights[4].textContent = t["jd-h5"];
+            
+            // NetEase
+            const wyCompany = document.querySelector('#experience .timeline-item:nth-child(2) .timeline-company');
+            if (wyCompany) wyCompany.textContent = t["wy-title"];
+            document.querySelector('#experience .timeline-item:nth-child(2) .timeline-role').textContent = t["wy-role"];
+            const wyHighlights = document.querySelectorAll('#experience .timeline-item:nth-child(2) .highlight');
+            wyHighlights[0].textContent = t["wy-h1"];
+            wyHighlights[1].textContent = t["wy-h2"];
+            wyHighlights[2].textContent = t["wy-h3"];
+            wyHighlights[3].textContent = t["wy-h4"];
+            
+            // Tsinghua
+            const tsCompany = document.querySelector('#experience .timeline-item:nth-child(3) .timeline-company');
+            if (tsCompany) tsCompany.textContent = t["tsinghua-title"];
+            document.querySelector('#experience .timeline-item:nth-child(3) .timeline-role').textContent = t["tsinghua-role"];
+            const tsHighlights = document.querySelectorAll('#experience .timeline-item:nth-child(3) .highlight');
+            tsHighlights[0].textContent = t["tsinghua-h1"];
+            tsHighlights[1].textContent = t["tsinghua-h2"];
+            tsHighlights[2].textContent = t["tsinghua-h3"];
+            tsHighlights[3].textContent = t["tsinghua-h4"];
+            
+            // Portfolio
+            document.querySelector('#portfolio .section-title').textContent = t["portfolio-title"];
+            
+            // Portfolio categories
+            const categories = document.querySelectorAll('.category-title');
+            if (categories[0]) categories[0].textContent = t["trans-category"];
+            if (categories[1]) categories[1].textContent = t["art-category"];
+            if (categories[2]) categories[2].textContent = t["ppt-category"];
+            if (categories[3]) categories[3].textContent = t["product-category"];
+            if (categories[4]) categories[4].textContent = t["poster-category"];
+            
+            // Translation cards
+            document.querySelectorAll('.portfolio-card')[0].querySelector('.portfolio-title').textContent = t["trans1-title"];
+            document.querySelectorAll('.portfolio-card')[0].querySelector('.portfolio-desc').textContent = t["trans1-desc"];
+            document.querySelectorAll('.portfolio-card')[0].querySelector('.portfolio-details-content').textContent = t["trans1-detail"];
+            
+            document.querySelectorAll('.portfolio-card')[1].querySelector('.portfolio-title').textContent = t["trans2-title"];
+            document.querySelectorAll('.portfolio-card')[1].querySelector('.portfolio-desc').textContent = t["trans2-desc"];
+            document.querySelectorAll('.portfolio-card')[1].querySelector('.portfolio-details-content').textContent = t["trans2-detail"];
+            
+            // Art card
+            document.querySelectorAll('.portfolio-card')[2].querySelector('.portfolio-title').textContent = t["art1-title"];
+            document.querySelectorAll('.portfolio-card')[2].querySelector('.portfolio-desc').textContent = t["art1-desc"];
+            document.querySelectorAll('.portfolio-card')[2].querySelector('.portfolio-details-content').textContent = t["art1-detail"];
+            
+            // Social card
+            document.querySelectorAll('.portfolio-card')[3].querySelector('.portfolio-title').textContent = t["social-title"];
+            document.querySelectorAll('.portfolio-card')[3].querySelector('.portfolio-desc').textContent = t["social-desc"];
+            document.querySelectorAll('.portfolio-card')[3].querySelector('.portfolio-details-content').textContent = t["social-detail"];
+            
+            // PPT card
+            document.querySelectorAll('.portfolio-card')[4].querySelector('.portfolio-title').textContent = t["ppt-title"];
+            document.querySelectorAll('.portfolio-card')[4].querySelector('.portfolio-desc').textContent = t["ppt-desc"];
+            document.querySelectorAll('.portfolio-card')[4].querySelector('.portfolio-details-content').textContent = t["ppt-detail"];
+            
+            // Product card
+            document.querySelectorAll('.portfolio-card')[5].querySelector('.portfolio-title').textContent = t["product-title"];
+            document.querySelectorAll('.portfolio-card')[5].querySelector('.portfolio-desc').textContent = t["product-desc"];
+            
+            // Poster card
+            document.querySelectorAll('.portfolio-card')[6].querySelector('.portfolio-title').textContent = t["poster-title"];
+            document.querySelectorAll('.portfolio-card')[6].querySelector('.portfolio-desc').textContent = t["poster-desc"];
+            document.querySelectorAll('.portfolio-card')[6].querySelector('.portfolio-details-content').textContent = t["poster-detail"];
+            
+            // Expand buttons
+            document.querySelectorAll('.expand-btn').forEach(btn => btn.textContent = t["expand"]);
+            
+            // Contact
+            document.querySelector('#contact .section-title').textContent = t["contact-title"];
+            document.querySelectorAll('.contact-item')[2].querySelector('span:last-child').textContent = t["resume"];
+            
+            // Footer
+            document.querySelector('footer p').textContent = t["footer"];
+        }
+    </script>
+</body>
+</html>
